@@ -41,7 +41,12 @@ if (lenis) {
   });
   if (!('IntersectionObserver' in window)) { all.forEach((el) => el.classList.add('is-in')); return; }
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      // En la galería de servicios del celu, las tarjetas de costado entran junto con la primera
+      const group = e.target.closest('.services__grid') ? e.target.parentElement.children : [e.target];
+      [...group].forEach((el) => { el.classList.add('is-in'); io.unobserve(el); });
+    });
   }, { rootMargin: '0px 0px -5% 0px', threshold: 0 });
   all.forEach((el) => io.observe(el));
   // Al final de la página el pie no llega a cruzar el margen: se muestra lo que quede.
@@ -222,3 +227,28 @@ if (clock) {
   const tick = () => { clock.textContent = fmt.format(new Date()); };
   tick(); setInterval(tick, 30000);
 }
+
+// Servicios en el celu: puntos que muestran qué tarjeta se ve y permiten saltar a otra.
+(() => {
+  const grid = document.querySelector('.services__grid');
+  const dots = [...document.querySelectorAll('.services__dot')];
+  if (!grid || !dots.length) return;
+  const cards = [...grid.children];
+  // Posición de cada tarjeta dentro de la galería, sin importar dónde esté la galería en la página
+  const leftOf = (card) => card.getBoundingClientRect().left - grid.getBoundingClientRect().left + grid.scrollLeft;
+  const update = () => {
+    const pad = parseFloat(getComputedStyle(grid).scrollPaddingLeft) || 0;
+    let best = 0, dist = Infinity;
+    cards.forEach((card, i) => {
+      const d = Math.abs(leftOf(card) - pad - grid.scrollLeft);
+      if (d < dist) { dist = d; best = i; }
+    });
+    dots.forEach((d, i) => d.setAttribute('aria-current', i === best ? 'true' : 'false'));
+  };
+  grid.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => {
+    const pad = parseFloat(getComputedStyle(grid).scrollPaddingLeft) || 0;
+    grid.scrollTo({ left: leftOf(cards[i]) - pad, behavior: 'smooth' });
+  }));
+  update();
+})();
