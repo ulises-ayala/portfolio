@@ -252,3 +252,14 @@ if (clock) {
   }));
   update();
 })();
+
+// Proyectos en el celu: cada tarjeta despliega su detalle (etiqueta, descripción y link).
+document.querySelectorAll('.card__toggle').forEach((btn) => {
+  const card = btn.closest('.card');
+  const label = btn.querySelector('.card__toggle-label');
+  btn.addEventListener('click', () => {
+    const open = card.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+    label.textContent = open ? 'Ocultar detalle' : 'Ver detalle';
+  });
+});

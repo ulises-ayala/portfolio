@@ -10,7 +10,7 @@
   <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <link rel="stylesheet" href="js/vendor/lenis.css">
-  <link rel="stylesheet" href="css/styles.css?v=2026-11-24-1">
+  <link rel="stylesheet" href="css/styles.css?v=2026-11-24-2">
 </head>
 <body>
   <!-- Logos (Simple Icons, CC0) -->
@@ -391,37 +391,57 @@
       <ol class="projects__grid">
         <li class="card card--ink">
           <span class="badge">01</span>
-          <p class="card__meta">Cliente real · Proyecto en equipo</p>
           <h3 class="card__title">Sistema de Gestión Carmesí</h3>
-          <p class="card__text">Sistema administrativo para una academia de danza: roles y permisos, alumnos, inscripciones con control de cupos, cuotas y pagos parciales, becas, caja por turnos, auditoría y reportes. Diseñé la arquitectura y definí las reglas de negocio junto al cliente.</p>
           <ul class="pills pills--sm"><li>TypeScript</li><li>NestJS</li><li>Next.js</li><li>PostgreSQL</li><li>Prisma</li><li>Docker</li></ul>
-          <a class="card__link" href="https://github.com/ulises-ayala/gestion-academia" target="_blank" rel="noopener">Ver repositorio <span aria-hidden="true">→</span></a>
+          <div class="card__more" id="proyecto-1-detalle">
+            <div class="card__more-inner">
+              <p class="card__meta">Cliente real · Proyecto en equipo</p>
+              <p class="card__text">Sistema administrativo para una academia de danza: roles y permisos, alumnos, inscripciones con control de cupos, cuotas y pagos parciales, becas, caja por turnos, auditoría y reportes. Diseñé la arquitectura y definí las reglas de negocio junto al cliente.</p>
+              <a class="card__link" href="https://github.com/ulises-ayala/gestion-academia" target="_blank" rel="noopener">Ver repositorio <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <button type="button" class="card__toggle" aria-expanded="false" aria-controls="proyecto-1-detalle"><span class="card__toggle-label">Ver detalle</span><svg class="card__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         </li>
 
         <li class="card card--accent">
           <span class="badge">02</span>
-          <p class="card__meta">Cliente real · Proyecto entregado</p>
           <h3 class="card__title">ASE Estudio Jurídico</h3>
-          <p class="card__text">Identidad visual y sistema de diseño en Figma a partir de una única pieza gráfica del cliente, y desarrollo del sitio completo, orientado a presentar servicios y captar consultas.</p>
           <ul class="pills pills--sm"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Figma</li><li>EmailJS</li></ul>
-          <a class="card__link" href="https://estudiojuridicoase.com.ar" target="_blank" rel="noopener">Ver sitio <span aria-hidden="true">→</span></a>
+          <div class="card__more" id="proyecto-2-detalle">
+            <div class="card__more-inner">
+              <p class="card__meta">Cliente real · Proyecto entregado</p>
+              <p class="card__text">Identidad visual y sistema de diseño en Figma a partir de una única pieza gráfica del cliente, y desarrollo del sitio completo, orientado a presentar servicios y captar consultas.</p>
+              <a class="card__link" href="https://estudiojuridicoase.com.ar" target="_blank" rel="noopener">Ver sitio <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <button type="button" class="card__toggle" aria-expanded="false" aria-controls="proyecto-2-detalle"><span class="card__toggle-label">Ver detalle</span><svg class="card__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         </li>
 
         <li class="card">
           <span class="badge">03</span>
-          <p class="card__meta">Proyecto personal · Mi banda</p>
           <h3 class="card__title">Sitio web de Fue Canónico</h3>
-          <p class="card__text">Sitio de una página para mi banda de Resistencia: presentación, el EP en grabación con enlaces a tomas en vivo, integrantes y redes. Lo diseñé en Figma y lo programé con animaciones propias, como un fondo líquido en WebGL y títulos que cambian de tipografía letra por letra.</p>
           <ul class="pills pills--sm"><li>Figma</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>WebGL</li><li>Netlify</li></ul>
-          <a class="card__link" href="https://fuecanonico.netlify.app/" target="_blank" rel="noopener">Ver sitio <span aria-hidden="true">→</span></a>
+          <div class="card__more" id="proyecto-3-detalle">
+            <div class="card__more-inner">
+              <p class="card__meta">Proyecto personal · Mi banda</p>
+              <p class="card__text">Sitio de una página para mi banda de Resistencia: presentación, el EP en grabación con enlaces a tomas en vivo, integrantes y redes. Lo diseñé en Figma y lo programé con animaciones propias, como un fondo líquido en WebGL y títulos que cambian de tipografía letra por letra.</p>
+              <a class="card__link" href="https://fuecanonico.netlify.app/" target="_blank" rel="noopener">Ver sitio <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <button type="button" class="card__toggle" aria-expanded="false" aria-controls="proyecto-3-detalle"><span class="card__toggle-label">Ver detalle</span><svg class="card__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         </li>
 
         <li class="card">
           <span class="badge">04</span>
-          <p class="card__meta">Proyecto académico · UTN</p>
           <h3 class="card__title">Sistema de Clasificación Industrial</h3>
-          <p class="card__text">Lógica de hardware embebido con sensores y actuadores para automatizar la clasificación y el control de lotes, con comunicación en tiempo real vía MQTT y Node-RED.</p>
           <ul class="pills pills--sm"><li>Raspberry Pi Pico 2 W</li><li>CircuitPython</li><li>OpenPLC</li><li>MQTT</li></ul>
+          <div class="card__more" id="proyecto-4-detalle">
+            <div class="card__more-inner">
+              <p class="card__meta">Proyecto académico · UTN</p>
+              <p class="card__text">Lógica de hardware embebido con sensores y actuadores para automatizar la clasificación y el control de lotes, con comunicación en tiempo real vía MQTT y Node-RED.</p>
+            </div>
+          </div>
+          <button type="button" class="card__toggle" aria-expanded="false" aria-controls="proyecto-4-detalle"><span class="card__toggle-label">Ver detalle</span><svg class="card__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         </li>
       </ol>
     </section>
@@ -563,6 +583,6 @@
     </div>
   </footer>
   <script src="js/vendor/lenis.min.js" defer></script>
-  <script src="js/main.js?v=2026-11-24-1" defer></script>
+  <script src="js/main.js?v=2026-11-24-2" defer></script>
 </body>
 </html>
