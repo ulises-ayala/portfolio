@@ -228,29 +228,51 @@ if (clock) {
   tick(); setInterval(tick, 30000);
 }
 
-// Servicios en el celu: puntos que muestran qué tarjeta se ve y permiten saltar a otra.
+// Servicios en el celu: galería centrada que arranca en "Mi especialidad".
+// Los puntos muestran qué tarjeta se ve y permiten saltar a otra.
 (() => {
   const grid = document.querySelector('.services__grid');
   const dots = [...document.querySelectorAll('.services__dot')];
   if (!grid || !dots.length) return;
   const cards = [...grid.children];
-  // Posición de cada tarjeta dentro de la galería, sin importar dónde esté la galería en la página
-  const leftOf = (card) => card.getBoundingClientRect().left - grid.getBoundingClientRect().left + grid.scrollLeft;
+  // Scroll que deja la tarjeta i centrada en la galería
+  const centerOf = (card) => card.getBoundingClientRect().left - grid.getBoundingClientRect().left + grid.scrollLeft
+    + card.offsetWidth / 2 - grid.clientWidth / 2;
   const update = () => {
-    const pad = parseFloat(getComputedStyle(grid).scrollPaddingLeft) || 0;
     let best = 0, dist = Infinity;
     cards.forEach((card, i) => {
-      const d = Math.abs(leftOf(card) - pad - grid.scrollLeft);
+      const d = Math.abs(centerOf(card) - grid.scrollLeft);
       if (d < dist) { dist = d; best = i; }
     });
     dots.forEach((d, i) => d.setAttribute('aria-current', i === best ? 'true' : 'false'));
   };
+  const start = () => {
+    if (grid.scrollWidth <= grid.clientWidth) return; // en la compu no es galería
+    const featured = grid.querySelector('.service--featured') || cards[0];
+    grid.scrollLeft = centerOf(featured);
+    update();
+  };
   grid.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
   dots.forEach((dot, i) => dot.addEventListener('click', () => {
-    const pad = parseFloat(getComputedStyle(grid).scrollPaddingLeft) || 0;
-    grid.scrollTo({ left: leftOf(cards[i]) - pad, behavior: 'smooth' });
+    grid.scrollTo({ left: centerOf(cards[i]), behavior: 'smooth' });
   }));
+  start();
+  window.addEventListener('load', start, { once: true });
   update();
+})();
+
+// Mini Figma: se dibuja a 500 px y se achica entera para que entre en el panel.
+(() => {
+  const fig = document.querySelector('.fig');
+  const box = fig && fig.parentElement;
+  if (!fig || !box) return;
+  const fit = () => {
+    const cs = getComputedStyle(box);
+    const room = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    fig.style.zoom = Math.min(1, room / 500);
+  };
+  fit();
+  new ResizeObserver(fit).observe(box);
 })();
 
 // Proyectos en el celu: cada tarjeta despliega su detalle (etiqueta, descripción y link).

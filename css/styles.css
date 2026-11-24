@@ -523,6 +523,8 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body); color: #1e1e1e; font-size: 10px;
   --fig-dur: 12s;
 }
+/* Con JS la ventana se dibuja siempre a 500 px y se achica entera (zoom), así nada se desarma en el celu */
+.js .fig { width: 500px; max-width: none; flex: none; }
 .fig__top {
   position: absolute; left: 0; right: 0; top: 0; height: 9%;
   display: flex; align-items: center; gap: 6px; padding: 0 10px;
@@ -1113,15 +1115,16 @@ a { color: inherit; text-decoration: none; }
   .services__grid {
     --bleed: calc(var(--gutter) + var(--line));
     grid-template-columns: none; grid-template-rows: repeat(7, auto);
-    grid-auto-flow: column; grid-auto-columns: min(82vw, 380px); gap: 0 14px;
-    margin-inline: calc(var(--bleed) * -1); padding: 8px var(--bleed) 36px;
+    grid-auto-flow: column; grid-auto-columns: var(--card); gap: 0 14px;
+    --card: min(82vw, 380px);
+    margin-inline: calc(var(--bleed) * -1); padding: 8px calc((100vw - var(--card)) / 2) 36px;
     margin-bottom: -28px; /* lugar para la sombra de la tarjeta blanca */
     overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scroll-padding-inline: var(--bleed);
+    scroll-snap-type: x mandatory;
     scrollbar-width: none; -webkit-overflow-scrolling: touch;
   }
   .services__grid::-webkit-scrollbar { display: none; }
-  .service { scroll-snap-align: start; padding: 28px 24px; }
+  .service { scroll-snap-align: center; padding: 28px 24px; }
   .service--featured { box-shadow: 0 16px 36px rgba(4, 10, 40, .45); }
   .services__dots { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }
   .services__dot {
@@ -1159,10 +1162,8 @@ a { color: inherit; text-decoration: none; }
   .actor .bubble { width: 150px; font-size: 11.5px; padding: 8px 10px; }
   .flow__visual--code { padding: 14px; }
   .live { top: 10px; right: 10px; font-size: 11px; padding: 6px 10px; }
-  .flow__visual--figma { padding: 14px; }
-  .fig { font-size: 8px; }
-  .fig__layer, .fig__label, .fig__input { font-size: 7.5px; }
-  .fig__file { display: none; }
+  .flow__visual--figma { padding: 18px 14px; min-height: 0; }
+  html:not(.js) .fig { font-size: 8px; }
   .talk { height: 330px; }
   .bubble { width: 150px; font-size: 11.5px; padding: 8px 10px; }
   .bubble--client { right: 18%; } .bubble--me { left: 18%; }
